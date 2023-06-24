@@ -6,7 +6,7 @@ from django.core.paginator import Paginator
 def stock(request):
     products = Product.objects.all().order_by('-id')
 
-    paginator = Paginator(products, 6)
+    paginator = Paginator(products, 10)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 
