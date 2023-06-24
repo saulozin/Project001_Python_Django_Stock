@@ -1,0 +1,18 @@
+{% extends 'global/base.html' %}
+
+{% block content %}
+    <div class="single-product">
+        <div class="product-links">
+            <a href="{% url 'app:stock' %}" class="btn btn-link">
+                Voltar
+            </a>
+        </div>
+        <h2 class="single-product-name">Category Detail</h2>
+        
+        <p><b>Name:</b> {{ category.category_name }}</p>
+
+        <div class="product-links">
+            <a class="btn btn-link" href="{% url 'app:update-category' category.category_name %}">Update</a>
+        </div>
+    </div>
+{% endblock content %}

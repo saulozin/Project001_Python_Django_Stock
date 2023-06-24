@@ -16,7 +16,7 @@
         <p><b>Quantity:</b> {{ product.quantity }}</p>
         <p><b>Location:</b> {{ product.location }}</p>
         <p><b>Category:</b> {{ product.category.category_name }}</p>
-        <p><b>Supplier:</b> {{ product.supplier }}</p>
+        <p><b>Supplier:</b> {{ product.supplier.supplier_name }}</p>
         <p><b>Description:</b> {{ product.description }}</p>
         {% if product.picture %}
         <p><img src="{{ product.picture.url }}" alt="{{product.code}} {{product.name}}"></p>

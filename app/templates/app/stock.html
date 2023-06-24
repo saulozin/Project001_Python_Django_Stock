@@ -5,6 +5,14 @@
 {% if user.is_authenticated %}
     {% if page_obj %}
     <div class="responsive-table">
+        <div class="product-links">
+            <a href="{% url 'app:register-category' %}" class="btn btn-link">
+                Category Register
+            </a>
+            <a href="{% url 'app:register-supplier' %}" class="btn btn-link">
+                Supplier Register
+            </a>
+        </div>
         <table class="products-table">
             <caption class="table-caption">
                 Stock Products
@@ -15,7 +23,8 @@
                     <th class="table-header">Name</th>
                     <th class="table-header">Serial Number</th>
                     <th class="table-header">Quantity</th>
-                    <th class="table-header">Validate Date</th>
+                    <th class="table-header">Category</th>
+                    <th class="table-header">Supplier</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,7 +37,16 @@
                         <td class="table-cel">{{ product.name }}</td>
                         <td class="table-cel">{{ product.serial_number }}</td>
                         <td class="table-cel">{{ product.quantity }}</td>
-                        <td class="table-cel">{{ product.validate_date }}</td>
+                        <td class="table-cel">
+                            <a class="table-link" href="{% url 'app:category-detail' product.category.category_name %}">
+                                {{ product.category.category_name }}
+                            </a>
+                        </td>
+                        <td class="table-cel">
+                            <a class="table-link" href="{% url 'app:supplier-detail' product.supplier.supplier_name %}">
+                                {{ product.supplier.supplier_name }}
+                            </a>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>

@@ -24,6 +24,7 @@ class Category(models.Model):
 
     def __str__(self) -> str:
         return f'{self.category_name}'
+
     
 class Supplier(models.Model):
     class Meta:
@@ -35,6 +36,7 @@ class Supplier(models.Model):
 
     def __str__(self) -> str:
         return f'{self.supplier_name}'
+
 
 class Product(models.Model):
     class Meta:

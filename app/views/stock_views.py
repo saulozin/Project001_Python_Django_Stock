@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Q
-from app.models import Product
+from app.models import Product, Category, Supplier
 from django.core.paginator import Paginator
 
 def stock(request):
@@ -54,5 +54,29 @@ def productDetail(request, product_code):
     return render(
         request,
         'app/product.html',
+        context,
+    )
+
+def categoryDetail(request, category_name):
+    category_detail = get_object_or_404(Category, category_name=category_name)
+
+    context = {
+        'category': category_detail,
+    }
+    return render(
+        request,
+        'app/category.html',
+        context,
+    )
+
+def supplierDetail(request, supplier_name):
+    supplier_detail = get_object_or_404(Supplier, supplier_name=supplier_name)
+
+    context = {
+        'supplier': supplier_detail,
+    }
+    return render(
+        request,
+        'app/supplier.html',
         context,
     )
