@@ -2,6 +2,11 @@
 
 {% block content %}
     <div class="single-product">
+        <div class="product-links">
+            <a href="{% url 'app:stock' %}" class="btn btn-link">
+                Voltar
+            </a>
+        </div>
         <h2 class="single-product-name">{{ product.name }}</h2>
         <p><b>Code:</b> {{ product.code }}</p>
         <p><b>Name:</b> {{ product.name }}</p>
