@@ -1,0 +1,20 @@
+{% extends 'perfil/index.html' %}
+
+{% block content %}
+<div class="form-wrapper">
+    <h2>Login</h2>
+
+    {% if user.is_authenticated %}
+        <p>
+            Você realizou Login como {{ user.username }}.
+            Clique <a href="{% url 'perfil:logout' %}"><b>aqui</b></a> para realizar Logout.
+        </p>
+        <p>
+            Para acessar o estoque clique no link ao lado: <a href="{% url 'app:stock' %}"><b>Estoque</b></a>.
+        </p>
+    {% else %}
+        {% include 'perfil/partials/_user-form.html' %}
+    {% endif %}
+
+</div>
+{% endblock content %}

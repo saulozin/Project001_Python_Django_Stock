@@ -1,0 +1,34 @@
+{% extends 'global/base.html' %}
+
+{% block content %}
+    <div class="single-product">
+        <h2 class="single-product-name">{{ product.name }}</h2>
+        <p><b>Code:</b> {{ product.code }}</p>
+        <p><b>Name:</b> {{ product.name }}</p>
+        <p><b>Registration Date:</b> {{ product.registration_date }}</p>
+        <p><b>Validate Date:</b> {{ product.validate_date }}</p>
+        <p><b>Quantity:</b> {{ product.quantity }}</p>
+        <p><b>Location:</b> {{ product.location }}</p>
+        <p><b>Category:</b> {{ product.category.category_name }}</p>
+        <p><b>Supplier:</b> {{ product.supplier }}</p>
+        <p><b>Description:</b> {{ product.description }}</p>
+        {% if product.picture %}
+        <p><img src="{{ product.picture.url }}" alt="{{product.code}} {{product.name}}"></p>
+        {% endif %}
+
+        <div class="product-links">
+            <a class="btn btn-link" href="{% url 'app:update-product' product.code %}">Update</a>
+            
+            
+            <form action="{% url 'app:remove-product' product.code %}" method="POST">
+                {% csrf_token %}
+                {% if confirmation == 'no' %}
+                <input type="hidden" name="confirmation" value="yes">
+                <button class="btn btn-link btn-delete" type="submit">Confirmar</button>
+                {% else %}
+                <button class="btn btn-link btn-delete" type="submit">Delete</button>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+{% endblock content %}

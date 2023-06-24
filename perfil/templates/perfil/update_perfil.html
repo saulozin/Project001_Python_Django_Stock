@@ -1,0 +1,15 @@
+{% extends 'global/base.html' %}
+
+{% block content %}
+<div class="form-wrapper">
+    <div class="product-links">
+        <a href="{% url 'app:stock' %}" class="btn btn-link">
+            Voltar
+        </a>
+    </div>
+    <h2>Perfil Update</h2>
+
+    {% include 'perfil/partials/_user-form.html' %}
+
+</div>
+{% endblock content %}
