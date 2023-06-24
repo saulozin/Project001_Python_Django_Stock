@@ -9,6 +9,7 @@ class ProductAdmin(admin.ModelAdmin):
         'id',
         'code',
         'name',
+        'serial_number',
         'quantity',
     )
     ordering = ('-id',)

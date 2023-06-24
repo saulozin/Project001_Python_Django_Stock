@@ -25,7 +25,7 @@ class StockForm(forms.ModelForm):
         model = Product
 
         fields = (
-            'code', 'name', 'registration_date', 'validate_date', 'quantity',
+            'code', 'name', 'serial_number', 'registration_date', 'validate_date', 'quantity',
             'location', 'description', 'category', 'supplier', 'picture', 
         )
 

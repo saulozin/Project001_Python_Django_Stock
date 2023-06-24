@@ -2,20 +2,6 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Q
 from app.models import Product
 from django.core.paginator import Paginator
-#from django.views.generic.list import ListView
-#from django.views import View
-#from django.http import Http404
-
-# Create your views here.
-#class Stock(ListView):
-#    model = models.Product
-#    template_name = 'app/estoque.html'
-#    context_object_name = 'products'
-
-#class ProductDetail(View):
-#    model = models.Product.objects.get()
-#    template_name = 'app/product.html'
-#    context_object_name = 'product'
 
 def stock(request):
     products = Product.objects.all().order_by('-id')
@@ -41,7 +27,8 @@ def search(request):
 
     products = Product.objects.filter(
         Q(name__icontains=search_value) | 
-        Q(code__icontains=search_value)
+        Q(code__icontains=search_value) |
+        Q(serial_number__icontains=search_value)
     ).order_by('-id')
 
     paginator = Paginator(products, 6)

@@ -41,8 +41,9 @@ class Product(models.Model):
         verbose_name = 'Product'
         verbose_name_plural = 'Products'
 
-    name = models.CharField(max_length=50)
     code = models.CharField(max_length=50)
+    name = models.CharField(max_length=50)
+    serial_number = models.CharField(max_length=50, blank=True)
     registration_date = models.DateField()
     validate_date = models.DateField()
     quantity = models.PositiveIntegerField()
