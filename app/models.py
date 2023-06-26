@@ -21,6 +21,7 @@ class Category(models.Model):
         verbose_name_plural = 'Categories'
 
     category_name = models.CharField(max_length=50)
+    owner = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
 
     def __str__(self) -> str:
         return f'{self.category_name}'
@@ -33,6 +34,7 @@ class Supplier(models.Model):
 
     supplier_code = models.CharField(max_length=50)
     supplier_name = models.CharField(max_length=50)
+    owner = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
 
     def __str__(self) -> str:
         return f'{self.supplier_name}'
@@ -55,6 +57,7 @@ class Product(models.Model):
     picture = models.ImageField(blank=True, upload_to='pictures/%Y/%m/')
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, blank=True, null=True)
     supplier = models.ForeignKey(Supplier, on_delete=models.SET_NULL, blank=True, null=True)
+    owner = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
 
     @staticmethod
     def resize_image(img, new_width=800):

@@ -10,10 +10,11 @@
         <h2 class="single-product-name">Category Detail</h2>
         
         <p><b>Name:</b> {{ category.category_name }}</p>
-
+        
+        {% if user ==  category.owner%}
         <div class="product-links">
             <a class="btn btn-link" href="{% url 'app:update-category' category.category_name %}">Update</a>
-
+            
             <form action="{% url 'app:remove-category' category.category_name %}" method="POST">
                 {% csrf_token %}
                 {% if confirmation == 'no' %}
@@ -24,5 +25,7 @@
                 {% endif %}
             </form>
         </div>
+        {% endif %}
+
     </div>
 {% endblock content %}

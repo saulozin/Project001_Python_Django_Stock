@@ -11,6 +11,7 @@
         <p><b>Supplier Code:</b> {{ supplier.supplier_code }}</p>
         <p><b>Supplier Name:</b> {{ supplier.supplier_name }}</p>
 
+        {% if user ==  supplier.owner%}
         <div class="product-links">
             <a class="btn btn-link" href="{% url 'app:update-supplier' supplier.supplier_code %}">Update</a>
 
@@ -23,6 +24,9 @@
                 <button class="btn btn-link btn-delete" type="submit">Delete</button>
                 {% endif %}
             </form>
+
         </div>
+        {% endif %}
+
     </div>
 {% endblock content %}

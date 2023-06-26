@@ -27,7 +27,7 @@
     <div class="responsive-table">
         <div class="product-links">
             <a href="{% url 'app:register-product' %}" class="btn btn-link">
-                Product Register
+                Create Product
             </a>
         </div>
         <table class="products-table">
@@ -46,12 +46,17 @@
             </thead>
             <tbody>
                 {% for product in page_obj %}
+                    {% if user == product.owner %}
                     <tr class="table-row">
                         <td class="table-cel"><a class="table-link" href="{% url 'app:product-detail' product.code %}">
                                 {{ product.code }}
                             </a>
                         </td>
-                        <td class="table-cel">{{ product.name }}</td>
+                        <td class="table-cel">
+                            <a class="table-link" href="{% url 'app:product-detail' product.code %}">
+                                {{ product.name }}
+                            </a>
+                        </td>
                         <td class="table-cel">{{ product.serial_number }}</td>
                         <td class="table-cel">{{ product.quantity }}</td>
                         <td class="table-cel">
@@ -61,6 +66,7 @@
                                 {{ product.supplier.supplier_name }}
                         </td>
                     </tr>
+                    {% endif %}
                 {% endfor %}
             </tbody>
         </table>
@@ -74,3 +80,5 @@
     <h1>Não há sessão iniciada, favor realizar Login ou criar Cadastro</h1>
 {% endif %}
 {% endblock content  %}
+
+

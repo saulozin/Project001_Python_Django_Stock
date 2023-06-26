@@ -14,7 +14,9 @@ def registerProduct(request):
         form = StockForm(request.POST, request.FILES)
 
         if form.is_valid():
-            product = form.save()
+            product = form.save(commit=False)
+            product.owner = request.user
+            product.save()
             messages.success(request, 'Produto cadastrado com sucesso!')
             return redirect('app:product-detail', product_code=product.code)
         
@@ -51,7 +53,9 @@ def registerCategory(request):
         form_category = CategoryForm(request.POST, request.FILES)
 
         if form_category.is_valid():
-            category = form_category.save()
+            category = form_category.save(commit=False)
+            category.owner = request.user
+            category.save()
             messages.success(request, 'Categoria cadastrada com sucesso!')
             return redirect('app:category-detail', category_name=category.category_name)
         
@@ -88,7 +92,9 @@ def registerSupplier(request):
         form = SupplierForm(request.POST, request.FILES)
 
         if form.is_valid():
-            supplier = form.save()
+            supplier = form.save(commit=False)
+            supplier.owner = request.user
+            supplier.save()
             messages.success(request, 'Fornecedor cadastrado com sucesso!')
             return redirect('app:supplier-detail', supplier_code=supplier.supplier_code)
         
@@ -118,7 +124,7 @@ def registerSupplier(request):
 
 @login_required(login_url='perfil:login')
 def updateProduct(request, product_code):
-    product = get_object_or_404(Product, code=product_code)
+    product = get_object_or_404(Product, code=product_code, owner=request.user)
     form_action = reverse('app:update-product', args=(product_code,))
 
     if request.method == 'POST':
@@ -157,7 +163,7 @@ def updateProduct(request, product_code):
 
 @login_required(login_url='perfil:login')
 def updateCategory(request, category_name):
-    category = get_object_or_404(Category, category_name=category_name)
+    category = get_object_or_404(Category, category_name=category_name, owner=request.user)
     form_action = reverse('app:update-category', args=(category_name,))
 
     if request.method == 'POST':
@@ -196,7 +202,7 @@ def updateCategory(request, category_name):
 
 @login_required(login_url='perfil:login')
 def updateSupplier(request, supplier_code):
-    supplier = get_object_or_404(Supplier, supplier_code=supplier_code)
+    supplier = get_object_or_404(Supplier, supplier_code=supplier_code, owner=request.user)
     form_action = reverse('app:update-supplier', args=(supplier_code,))
 
     if request.method == 'POST':
@@ -235,7 +241,7 @@ def updateSupplier(request, supplier_code):
 
 @login_required(login_url='perfil:login')
 def removeProduct(request, product_code):
-    product = get_object_or_404(Product, code=product_code)
+    product = get_object_or_404(Product, code=product_code, owner=request.user)
 
     confirmation = request.POST.get('confirmation', 'no')
 
@@ -257,7 +263,7 @@ def removeProduct(request, product_code):
 
 @login_required(login_url='perfil:login')
 def removeCategory(request, category_name):
-    category = get_object_or_404(Category, category_name=category_name)
+    category = get_object_or_404(Category, category_name=category_name, owner=request.user)
 
     confirmation = request.POST.get('confirmation', 'no')
 
@@ -280,7 +286,7 @@ def removeCategory(request, category_name):
 
 @login_required(login_url='perfil:login')
 def removeSupplier(request, supplier_code):
-    supplier = get_object_or_404(Supplier, supplier_code=supplier_code)
+    supplier = get_object_or_404(Supplier, supplier_code=supplier_code, owner=request.user)
 
     confirmation = request.POST.get('confirmation', 'no')
 

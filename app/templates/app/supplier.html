@@ -26,7 +26,7 @@
     <div class="responsive-table">
         <div class="product-links">
             <a href="{% url 'app:register-supplier' %}" class="btn btn-link">
-                Supplier Register
+                Create Supplier
             </a>
         </div>
         <table class="products-table">
@@ -47,7 +47,11 @@
                                 {{ supplier.supplier_code }}
                             </a>
                         </td>
-                        <td class="table-cel">{{ supplier.supplier_name }}</td>
+                        <td class="table-cel">
+                            <a class="table-link" href="{% url 'app:supplier-detail' supplier.supplier_code %}">
+                                {{ supplier.supplier_name }}
+                            </a>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>
