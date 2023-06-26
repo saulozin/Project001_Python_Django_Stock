@@ -1,18 +1,64 @@
 {% extends 'global/base.html' %}
 
+{% block search %}
+{% if user.is_authenticated %}
+<div class="search">
+    <form 
+      action="{% url 'app:search-supplier' %}"
+      method="GET"
+    >
+      <input 
+        type="search" 
+        class="search-input"
+        placeholder="Search"
+        id="search"
+        name="q"
+        value="{{ request.GET.q.strip }}"
+      >
+    </form>
+</div>
+{% endif %}
+{% endblock search %}
+
 {% block content %}
-    <div class="single-product">
+{% if user.is_authenticated %}
+    {% if page_obj %}
+    <div class="responsive-table">
         <div class="product-links">
-            <a href="{% url 'app:stock' %}" class="btn btn-link">
-                Voltar
+            <a href="{% url 'app:register-supplier' %}" class="btn btn-link">
+                Supplier Register
             </a>
         </div>
-        <h2 class="single-product-name">Supplier Detail</h2>
-        <p><b>Supplier Code:</b> {{ supplier.supplier_code }}</p>
-        <p><b>Supplier Name:</b> {{ supplier.supplier_name }}</p>
-
-        <div class="product-links">
-            <a class="btn btn-link" href="{% url 'app:update-supplier' supplier.supplier_name %}">Update</a>
-        </div>
+        <table class="products-table">
+            <caption class="table-caption">
+                Suppliers
+            </caption>
+            <thead>
+                <tr class="table-row table-row-header">
+                    <th class="table-header">Supplier Code</th>
+                    <th class="table-header">Supplier Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for supplier in page_obj %}
+                    <tr class="table-row">
+                        <td class="table-cel">
+                            <a class="table-link" href="{% url 'app:supplier-detail' supplier.supplier_code %}">
+                                {{ supplier.supplier_code }}
+                            </a>
+                        </td>
+                        <td class="table-cel">{{ supplier.supplier_name }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
-{% endblock content %}
+    {% else %}
+    <div class="single-product">
+        <h2 class="single-product-name">Fornecedor não encontrado.</h2>
+    </div>
+    {% endif %}
+{% else %}
+    <h1>Não há sessão iniciada, favor realizar Login ou criar Cadastro</h1>
+{% endif %}
+{% endblock content  %}

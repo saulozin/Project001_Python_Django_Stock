@@ -1,16 +1,33 @@
 
 {% extends 'global/base.html' %}
 
+{% block search %}
+{% if user.is_authenticated %}
+<div class="search">
+    <form 
+      action="{% url 'app:search' %}"
+      method="GET"
+    >
+      <input 
+        type="search" 
+        class="search-input"
+        placeholder="Search"
+        id="search"
+        name="q"
+        value="{{ request.GET.q.strip }}"
+      >
+    </form>
+</div>
+{% endif %}
+{% endblock search %}
+
 {% block content %}
 {% if user.is_authenticated %}
     {% if page_obj %}
     <div class="responsive-table">
         <div class="product-links">
-            <a href="{% url 'app:register-category' %}" class="btn btn-link">
-                Category Register
-            </a>
-            <a href="{% url 'app:register-supplier' %}" class="btn btn-link">
-                Supplier Register
+            <a href="{% url 'app:register-product' %}" class="btn btn-link">
+                Product Register
             </a>
         </div>
         <table class="products-table">
@@ -38,14 +55,10 @@
                         <td class="table-cel">{{ product.serial_number }}</td>
                         <td class="table-cel">{{ product.quantity }}</td>
                         <td class="table-cel">
-                            <a class="table-link" href="{% url 'app:category-detail' product.category.category_name %}">
                                 {{ product.category.category_name }}
-                            </a>
                         </td>
                         <td class="table-cel">
-                            <a class="table-link" href="{% url 'app:supplier-detail' product.supplier.supplier_name %}">
                                 {{ product.supplier.supplier_name }}
-                            </a>
                         </td>
                     </tr>
                 {% endfor %}

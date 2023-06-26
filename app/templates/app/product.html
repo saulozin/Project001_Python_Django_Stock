@@ -25,7 +25,6 @@
         <div class="product-links">
             <a class="btn btn-link" href="{% url 'app:update-product' product.code %}">Update</a>
             
-            
             <form action="{% url 'app:remove-product' product.code %}" method="POST">
                 {% csrf_token %}
                 {% if confirmation == 'no' %}

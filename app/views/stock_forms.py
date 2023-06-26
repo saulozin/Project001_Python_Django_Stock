@@ -53,7 +53,7 @@ def registerCategory(request):
         if form_category.is_valid():
             category = form_category.save()
             messages.success(request, 'Categoria cadastrada com sucesso!')
-            return redirect('app:stock')
+            return redirect('app:category-detail', category_name=category.category_name)
         
         messages.error(request, 'Não foi possível cadastrar a categoria!')
         
@@ -90,7 +90,7 @@ def registerSupplier(request):
         if form.is_valid():
             supplier = form.save()
             messages.success(request, 'Fornecedor cadastrado com sucesso!')
-            return redirect('app:stock')
+            return redirect('app:supplier-detail', supplier_code=supplier.supplier_code)
         
         messages.error(request, 'Não foi possível cadastrar o fornecedor!')
         
@@ -195,9 +195,9 @@ def updateCategory(request, category_name):
     )
 
 @login_required(login_url='perfil:login')
-def updateSupplier(request, supplier_name):
-    supplier = get_object_or_404(Supplier, supplier_name=supplier_name)
-    form_action = reverse('app:update-supplier', args=(supplier_name,))
+def updateSupplier(request, supplier_code):
+    supplier = get_object_or_404(Supplier, supplier_code=supplier_code)
+    form_action = reverse('app:update-supplier', args=(supplier_code,))
 
     if request.method == 'POST':
 
@@ -206,7 +206,7 @@ def updateSupplier(request, supplier_name):
         if form.is_valid():
             supplier = form.save()
             messages.success(request, 'Fornecedor atualizado com sucesso!')
-            return redirect('app:update-supplier', supplier_name=supplier.supplier_name)
+            return redirect('app:update-supplier', supplier_code=supplier.supplier_code)
         
         messages.error(request, 'Não foi possível atualizar o fornecedor!')
         
@@ -241,6 +241,7 @@ def removeProduct(request, product_code):
 
     if confirmation == 'yes':
         product.delete()
+        messages.success(request, 'Produto deletado com sucesso!')
         return redirect('app:stock')
 
     context = {
@@ -251,5 +252,50 @@ def removeProduct(request, product_code):
     return render(
         request,
         'app/product.html',
+        context,
+    )
+
+@login_required(login_url='perfil:login')
+def removeCategory(request, category_name):
+    category = get_object_or_404(Category, category_name=category_name)
+
+    confirmation = request.POST.get('confirmation', 'no')
+
+    if confirmation == 'yes':
+        category.delete()
+        messages.success(request, 'Categoria deletada com sucesso!')
+        return redirect('app:category')
+
+    context = {
+        'category': category,
+        'confirmation': confirmation,
+    }
+
+    return render(
+        request,
+        'app/category-detail.html',
+        context,
+    )
+
+
+@login_required(login_url='perfil:login')
+def removeSupplier(request, supplier_code):
+    supplier = get_object_or_404(Supplier, supplier_code=supplier_code)
+
+    confirmation = request.POST.get('confirmation', 'no')
+
+    if confirmation == 'yes':
+        supplier.delete()
+        messages.success(request, 'Fornecedor deletado com sucesso!')
+        return redirect('app:supplier')
+
+    context = {
+        'supplier': supplier,
+        'confirmation': confirmation,
+    }
+
+    return render(
+        request,
+        'app/supplier-detail.html',
         context,
     )
