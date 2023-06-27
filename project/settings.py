@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '0q9qf64"6i:kh]#Gf?75OIM9=&>d=2z_mf*DC\V4|c$*Y!=?''&ugn]!pcfw@eaf'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     '192.168.0.171',
@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'db_project_stock',
         'USER': 'admin_db_stock',
@@ -133,7 +133,7 @@ STATICFILES_DIRS = (
     BASE_DIR / 'base_static',
 )
 
-STATIC_ROOT = BASE_DIR / 'static' #collectstatic
+STATIC_ROOT = '/opt/myenv/static/' #collectstatic
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
