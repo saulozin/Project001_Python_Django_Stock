@@ -128,15 +128,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = BASE_DIR / 'app/static/'
+STATIC_URL = 'app/static/'
 STATICFILES_DIRS = (
-    BASE_DIR / 'app/base_static',
+    '/home/saulo/stockapp1/app/base_static/',
 )
 
-STATIC_ROOT = BASE_DIR / 'app/static/' #collectstatic
+STATIC_ROOT = '/home/saulo/stockapp1/app/static/' #collectstatic
 
-MEDIA_URL = BASE_DIR / '/app/media/'
-MEDIA_ROOT = BASE_DIR / 'app/media'
+MEDIA_URL = '/app/media/'
+MEDIA_ROOT = '/home/saulo/stockapp1/app/media/'
 
 MESSAGE_TAGS = {
     constants.DEBUG: 'alert-info',
