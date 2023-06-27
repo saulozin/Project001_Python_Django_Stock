@@ -21,15 +21,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '0q9qf64"6i:kh]#Gf?75OIM9=&>d=2z_mf*DC\V4|c$*Y!=?''&ugn]!pcfw@eaf'
+SECRET_KEY = 'django-insecure-z*z!p@q0*9^j&58!ma_=%zs7v4wnjpf3*4q@q9uo&72$^16816'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
-    '192.168.0.171',
-    '127.0.0.1',
-    'localhost',
+    
 ]
 
 
@@ -84,12 +82,8 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 DATABASES = {
      'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'db_project_stock',
-        'USER': 'admin_db_stock',
-        'PASSWORD': 'senha_admin_db_stock',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -128,15 +122,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = 'app/static/'
 STATICFILES_DIRS = (
-    BASE_DIR / 'base_static',
+    BASE_DIR / 'app/base_static',
 )
 
-STATIC_ROOT = BASE_DIR / '/static/' #collectstatic
+STATIC_ROOT = BASE_DIR / 'app/static/' #collectstatic
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/app/media/'
+MEDIA_ROOT = BASE_DIR / 'app/media'
 
 MESSAGE_TAGS = {
     constants.DEBUG: 'alert-info',
