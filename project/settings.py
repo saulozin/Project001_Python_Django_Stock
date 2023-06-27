@@ -130,13 +130,13 @@ USE_TZ = True
 
 STATIC_URL = 'app/static/'
 STATICFILES_DIRS = (
-    '/home/saulo/stockapp1/app/base_static/',
+    BASE_DIR / 'app/base_static/',
 )
 
-STATIC_ROOT = '/home/saulo/stockapp1/app/static/' #collectstatic
+STATIC_ROOT = BASE_DIR / 'app/static/' #collectstatic
 
 MEDIA_URL = '/app/media/'
-MEDIA_ROOT = '/home/saulo/stockapp1/app/media/'
+MEDIA_ROOT = BASE_DIR / 'app/media/'
 
 MESSAGE_TAGS = {
     constants.DEBUG: 'alert-info',
