@@ -21,12 +21,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-z*z!p@q0*9^j&58!ma_=%zs7v4wnjpf3*4q@q9uo&72$^16816'
+SECRET_KEY = '0q9qf64"6i:kh]#Gf?75OIM9=&>d=2z_mf*DC\V4|c$*Y!=?''&ugn]!pcfw@eaf'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '192.168.0.171',
+    '127.0.0.1',
+    'localhost',
+]
 
 
 # Application definition
@@ -79,9 +83,18 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': BASE_DIR / 'db.sqlite3',
+#    }
+
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'db_project_stock',
+        'USER': 'admin_db_stock',
+        'PASSWORD': 'senha_admin_db_stock',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -148,3 +161,8 @@ SESSION_SAVE_EVERY_REQUEST = False
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+try:
+    from project.local_settings import *
+except ImportError:
+    ...
